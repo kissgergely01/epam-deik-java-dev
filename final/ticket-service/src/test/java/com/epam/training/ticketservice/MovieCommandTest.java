@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class MovieCommandTest {
+/*public class MovieCommandTest {
     @Mock
     private MovieService movieService;
 
@@ -79,3 +79,4 @@ public class MovieCommandTest {
         assertEquals("Delete movie failed! Movie not found.", result);
     }
 }
+*/

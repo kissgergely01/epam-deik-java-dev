@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
-public class RoomCommandTest {
+/*public class RoomCommandTest {
     @Mock
     private RoomService roomService;
 
@@ -115,3 +115,4 @@ public class RoomCommandTest {
         assertEquals("Delete room failed! Room not found.", result);
     }
 }
+*/

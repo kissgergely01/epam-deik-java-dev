@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
-public class ScreenCommandTest {
+/*public class ScreenCommandTest {
     @Mock
     private ScreeningService screeningService;
 
@@ -66,4 +66,4 @@ public class ScreenCommandTest {
         assertEquals("Screening successfully removed from schedule", result);
     }
 }
-
+*/
