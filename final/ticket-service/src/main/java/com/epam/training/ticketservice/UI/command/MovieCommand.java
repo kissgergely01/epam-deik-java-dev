@@ -13,18 +13,19 @@ import java.util.List;
 public class MovieCommand {
     private final MovieService movieService;
 
-    @ShellMethod(key = "add movie", value = "Movie added")
-    public String addMovie(String title, String genre, Integer duration) {
+    @ShellMethod(key = "add movie", value = "Add a new movie")
+    public String createMovie(String title, String category, Integer length) {
         try {
-            movieService.addMovie(title, genre,duration);
-            return "Create movie was successful!";
+            movieService.createMovie(title, category, length);
+            return "Movie added successfully!";
         } catch (Exception e) {
-            return "Create movie failed!";
+            return "Failed to add movie!";
         }
     }
-    @ShellMethod(key = "list movies", value = "Get movies")
-    public List<MovieDTO> description(){
-        return movieService.listMovies();
 
+    @ShellMethod(key = "list movies", value = "List all movies")
+    public List<MovieDTO> listMovies() {
+        return movieService.listMovies();
     }
 }
+

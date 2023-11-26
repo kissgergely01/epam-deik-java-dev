@@ -15,42 +15,30 @@ import java.util.stream.Collectors;
 public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
     @Override
-    public void addMovie(String title, String genre, Integer duration) {
+    public void createMovie(String title, String genre, Integer duration) {
         Movie movie = new Movie(title, genre, duration);
         movieRepository.save(movie);
     }
 
     @Override
-    public Optional<MovieDTO> updateMovie(String title, String genre, Integer duration) {
-        Optional<Movie> optionalMovie = movieRepository.findByTitle(title);
-
-        if (optionalMovie.isPresent()) {
-            Movie movie = optionalMovie.get();
-            movie.setCategory(genre);
-            movie.setLength(duration);
-            movieRepository.save(movie);
-
-            MovieDTO updatedMovieDto = new MovieDTO(movie.getTitle(), movie.getCategory(), movie.getLength());
-            return Optional.of(updatedMovieDto);
-        } else {
-            return Optional.empty();
-        }
+    public Optional<MovieDTO> updateMovie(String title, String category, Integer length) {
+        return movieRepository.findByTitle(title)
+                .map(movie -> {
+                    movie.setCategory(category);
+                    movie.setLength(length);
+                    movieRepository.save(movie);
+                    return new MovieDTO(movie.getTitle(), movie.getCategory(), movie.getLength());
+                });
     }
 
 
     @Override
     public Optional<MovieDTO> deleteMovie(String title) {
-        Optional<Movie> optionalMovie = movieRepository.findByTitle(title);
-
-        if (optionalMovie.isPresent()) {
-            Movie movie = optionalMovie.get();
-            movieRepository.delete(movie);
-
-            MovieDTO deletedMovieDto = new MovieDTO(movie.getTitle(), movie.getCategory(), movie.getLength());
-            return Optional.of(deletedMovieDto);
-        } else {
-            return Optional.empty();
-        }
+        return movieRepository.findByTitle(title)
+                .map(movie -> {
+                    movieRepository.delete(movie);
+                    return new MovieDTO(movie.getTitle(), movie.getCategory(), movie.getLength());
+                });
     }
 
     @Override
