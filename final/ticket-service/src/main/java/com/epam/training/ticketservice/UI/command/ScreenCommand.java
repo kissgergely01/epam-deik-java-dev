@@ -1,17 +1,16 @@
 package com.epam.training.ticketservice.UI.command;
 
 import com.epam.training.ticketservice.core.Users.UserService;
-import com.epam.training.ticketservice.core.Users.model.UserDTO;
+import com.epam.training.ticketservice.core.Users.model.UserDto;
 import com.epam.training.ticketservice.core.Users.persistence.User;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
 import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
 import com.epam.training.ticketservice.core.screening.ScreeningService;
-import com.epam.training.ticketservice.core.screening.model.ScreeningDTO;
+import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,7 +31,7 @@ public class ScreenCommand {
     @ShellMethod(key = "create screening", value = " creating a screening in a cinema room")
     public String createScreening(String movieName, String roomName, String screeningTime) throws ParseException {
         date = LocalDateTime.parse(screeningTime, format);
-        ScreeningDTO screeningDto = ScreeningDTO.builder()
+        ScreeningDto screeningDto = ScreeningDto.builder()
                 .title(movieRepository.findByTitle(movieName).get())
                 .room(roomRepository.findByName(roomName).get())
                 .screeningDate(date)
@@ -69,10 +68,8 @@ public class ScreenCommand {
         }
     }
 
-
-
     private Availability isAvailable(){
-        Optional<UserDTO> user = userService.describe();
+        Optional<UserDto> user = userService.describe();
         return user.isPresent() &&  user.get().getUser_right() != User.User_right.ADMIN
                 ? Availability.available()
                 : Availability.unavailable("You are not an admin!");

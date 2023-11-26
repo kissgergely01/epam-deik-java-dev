@@ -1,7 +1,7 @@
 package com.epam.training.ticketservice;
 
 import com.epam.training.ticketservice.core.Users.UserServiceImpl;
-import com.epam.training.ticketservice.core.Users.model.UserDTO;
+import com.epam.training.ticketservice.core.Users.model.UserDto;
 import com.epam.training.ticketservice.core.Users.persistence.User;
 import com.epam.training.ticketservice.core.Users.persistence.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,7 +38,7 @@ class UserTest {
         when(userRepository.findByUsernameAndPassword(username, password)).thenReturn(Optional.of(user));
 
         // Act
-        Optional<UserDTO> loggedInUser = userService.login(username, password);
+        Optional<UserDto> loggedInUser = userService.login(username, password);
 
         // Assert
         assertTrue(loggedInUser.isPresent());
@@ -56,14 +56,14 @@ class UserTest {
         when(userRepository.findByUsernameAndPassword(username, password)).thenReturn(Optional.empty());
 
         // Act
-        Optional<UserDTO> loggedInUser = userService.login(username, password);
+        Optional<UserDto> loggedInUser = userService.login(username, password);
 
         // Assert
         assertTrue(loggedInUser.isEmpty());
     }
 
     @Test
-    void testLoginAdminUser() {
+    void testAdminLogin() {
         // Arrange
         String username = "admin_user";
         String password = "admin123";
@@ -72,7 +72,7 @@ class UserTest {
         when(userRepository.findByUsernameAndPassword(username, password)).thenReturn(Optional.of(adminUser));
 
         // Act
-        Optional<UserDTO> loggedInAdmin = userService.login(username, password);
+        Optional<UserDto> loggedInAdmin = userService.login(username, password);
 
         // Assert
         assertTrue(loggedInAdmin.isPresent());
@@ -90,7 +90,7 @@ class UserTest {
         when(userRepository.findByUsernameAndPassword(username, password)).thenReturn(Optional.empty());
 
         // Act
-        Optional<UserDTO> loggedInAdmin = userService.login(username, password);
+        Optional<UserDto> loggedInAdmin = userService.login(username, password);
 
         // Assert
         assertTrue(loggedInAdmin.isEmpty());
@@ -109,7 +109,7 @@ class UserTest {
         userService.login(username, password);
 
         // Act
-        Optional<UserDTO> loggedOutUser = userService.logout();
+        Optional<UserDto> loggedOutUser = userService.logout();
 
         // Assert
         assertTrue(loggedOutUser.isPresent());
@@ -118,12 +118,12 @@ class UserTest {
         assertEquals(User.User_right.USER, loggedOutUser.get().getUser_right());
 
         // Check that the user is actually logged out
-        Optional<UserDTO> loggedInUser = userService.describe();
+        Optional<UserDto> loggedInUser = userService.describe();
         assertTrue(loggedInUser.isEmpty());
     }
 
     @Test
-    void testDescribeAdminUser() {
+    void testDescribe() {
         // Arrange
         String username = "admin_user";
         String password = "admin123";
@@ -135,7 +135,7 @@ class UserTest {
         userService.login(username, password);
 
         // Act
-        Optional<UserDTO> loggedInAdmin = userService.describe();
+        Optional<UserDto> loggedInAdmin = userService.describe();
 
         // Assert
         assertTrue(loggedInAdmin.isPresent());
@@ -158,7 +158,7 @@ class UserTest {
     }
 
     @Test
-    void testRegisterAdminUser() {
+    void testRegisterAdmin() {
         // Arrange
         String username = "admin_user";
         String password = "admin_password";

@@ -1,7 +1,7 @@
 package com.epam.training.ticketservice;
 
 import com.epam.training.ticketservice.core.room.RoomService;
-import com.epam.training.ticketservice.core.room.model.RoomDTO;
+import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.UI.command.RoomCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
-/*public class RoomCommandTest {
+public class RoomCommandTest {
     @Mock
     private RoomService roomService;
 
@@ -38,7 +38,7 @@ import static org.mockito.Mockito.*;
         String result = roomCommand.createRoom("Room1", 5, 8);
 
         // Assert
-        assertEquals("Create room was successful!", result);
+        assertEquals("Room creation successful!", result);
     }
 
     @Test
@@ -50,7 +50,7 @@ import static org.mockito.Mockito.*;
         String result = roomCommand.createRoom("Room1", 5, 8);
 
         // Assert
-        assertEquals("Create room failed!", result);
+        assertEquals("Failed to create room!", result);
     }
 
     @Test
@@ -70,7 +70,7 @@ import static org.mockito.Mockito.*;
     @Test
     void updateRoom_ShouldReturnSuccessMessage_WhenRoomUpdateIsSuccessful() {
         // Arrange
-        when(roomService.updateRoom(any(), any(), any())).thenReturn(Optional.of(new RoomDTO("UpdatedRoom", 6, 10)));
+        when(roomService.updateRoom(any(), any(), any())).thenReturn(Optional.of(new RoomDto("UpdatedRoom", 6, 10)));
 
         // Act
         String result = roomCommand.updateRoom("Room1", 6, 10);
@@ -94,7 +94,7 @@ import static org.mockito.Mockito.*;
     @Test
     void deleteRoom_ShouldReturnSuccessMessage_WhenRoomDeletionIsSuccessful() {
         // Arrange
-        when(roomService.deleteRoom(any())).thenReturn(Optional.of(new RoomDTO("DeletedRoom", 7, 12)));
+        when(roomService.deleteRoom(any())).thenReturn(Optional.of(new RoomDto("DeletedRoom", 7, 12)));
 
         // Act
         String result = roomCommand.deleteRoom("Room1");
@@ -115,4 +115,3 @@ import static org.mockito.Mockito.*;
         assertEquals("Delete room failed! Room not found.", result);
     }
 }
-*/

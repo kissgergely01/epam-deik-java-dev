@@ -1,12 +1,11 @@
 package com.epam.training.ticketservice.core.room;
 
 
-import com.epam.training.ticketservice.core.room.model.RoomDTO;
+import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.room.persistence.Room;
 import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,29 +22,29 @@ public class RoomServiceImpl implements  RoomService{
     }
 
     @Override
-    public Optional<RoomDTO> updateRoom(String name, Integer numRows, Integer numColumns) {
+    public Optional<RoomDto> updateRoom(String name, Integer numRows, Integer numColumns) {
         return roomRepository.findByName(name)
                 .map(room -> {
                     room.setColumnsNumber(numColumns);
                     room.setRowsNumber(numRows);
                     roomRepository.save(room);
-                    return new RoomDTO(room.getName(), room.getRowsNumber(), room.getColumnsNumber());
+                    return new RoomDto(room.getName(), room.getRowsNumber(), room.getColumnsNumber());
                 });
     }
 
     @Override
-    public Optional<RoomDTO> deleteRoom(String name) {
+    public Optional<RoomDto> deleteRoom(String name) {
         return roomRepository.findByName(name)
                 .map(room -> {
                     roomRepository.delete(room);
-                    return new RoomDTO(room.getName(), room.getRowsNumber(), room.getColumnsNumber());
+                    return new RoomDto(room.getName(), room.getRowsNumber(), room.getColumnsNumber());
                 });
     }
 
     @Override
-    public List<RoomDTO> listRooms() {
+    public List<RoomDto> listRooms() {
         return roomRepository.findAll().stream()
-                .map(room -> new RoomDTO(room.getName(), room.getRowsNumber(), room.getColumnsNumber()))
+                .map(room -> new RoomDto(room.getName(), room.getRowsNumber(), room.getColumnsNumber()))
                 .collect(Collectors.toList());
     }
 }

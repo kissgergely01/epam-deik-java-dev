@@ -2,9 +2,8 @@ package com.epam.training.ticketservice;
 
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
-import com.epam.training.ticketservice.core.room.persistence.Room;
 import com.epam.training.ticketservice.core.screening.ScreeningServiceImpl;
-import com.epam.training.ticketservice.core.screening.model.ScreeningDTO;
+import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import com.epam.training.ticketservice.core.screening.persistence.Screening;
 import com.epam.training.ticketservice.core.screening.persistence.ScreeningRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +44,7 @@ class ScreeningTest {
         when(screenRepository.findAll()).thenReturn(Collections.singletonList(new Screening()));
 
         // Act
-        List<ScreeningDTO> result = screenService.listScreens();
+        List<ScreeningDto> result = screenService.listScreens();
 
         // Assert
         assertNotNull(result);

@@ -2,12 +2,11 @@ package com.epam.training.ticketservice.core.screening;
 
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
-import com.epam.training.ticketservice.core.screening.model.ScreeningDTO;
+import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import com.epam.training.ticketservice.core.screening.persistence.Screening;
 import com.epam.training.ticketservice.core.screening.persistence.ScreeningRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ public class ScreeningServiceImpl implements ScreeningService {
     private final MovieRepository movieRepository;
 
     @Override
-    public String registerScreen(ScreeningDTO screeningDTO) {
+    public String registerScreen(ScreeningDto screeningDTO) {
         if (checkForOverlap(screeningDTO)) {
             return "There is an overlapping screening";
         }
@@ -33,7 +32,7 @@ public class ScreeningServiceImpl implements ScreeningService {
 
         return screen.toString();
     }
-    private Screening createScreeningFromDto(ScreeningDTO screeningDTO) {
+    private Screening createScreeningFromDto(ScreeningDto screeningDTO) {
         Screening screening = new Screening();
         screening.setRoom(screeningDTO.getRoom());
         screening.setTitle(screeningDTO.getTitle());
@@ -41,7 +40,7 @@ public class ScreeningServiceImpl implements ScreeningService {
         screening.setScreeningEndDate(screeningDTO.getScreeningEndDate());
         return screening;
     }
-    private boolean isBreakPeriod(ScreeningDTO screeningDTO) {
+    private boolean isBreakPeriod(ScreeningDto screeningDTO) {
         return screeningRepository
                 .findByScreeningEndDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
                         screeningDTO.getScreeningDate().minusSeconds(10*60),
@@ -50,7 +49,7 @@ public class ScreeningServiceImpl implements ScreeningService {
                 .isPresent();
     }
 
-    public boolean checkForOverlap(ScreeningDTO screeningDTO){
+    public boolean checkForOverlap(ScreeningDto screeningDTO){
         return screeningRepository
                 .findByScreeningDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
                         screeningDTO.getScreeningDate(), screeningDTO.getScreeningEndDate(), screeningDTO.getRoom().getName())
@@ -70,7 +69,7 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     @Override
-    public List<ScreeningDTO> listScreens() {
+    public List<ScreeningDto> listScreens() {
         return screeningRepository.findAll()
                 .stream()
                 .map(this::convertToDto)
@@ -86,9 +85,8 @@ public class ScreeningServiceImpl implements ScreeningService {
         screeningRepository.deleteByMovieAndRoom_NameAndDate(movie, roomName, screenDate);
     }
 
-
-    public ScreeningDTO convertToDto(Screening screen){
-        return ScreeningDTO.builder()
+    public ScreeningDto convertToDto(Screening screen){
+        return ScreeningDto.builder()
                 .title(screen.getTitle())
                 .room(screen.getRoom())
                 .screeningDate(screen.getScreeningDate())

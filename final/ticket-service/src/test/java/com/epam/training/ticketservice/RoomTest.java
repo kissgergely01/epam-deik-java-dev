@@ -1,7 +1,7 @@
 package com.epam.training.ticketservice;
 
 import com.epam.training.ticketservice.core.room.RoomServiceImpl;
-import com.epam.training.ticketservice.core.room.model.RoomDTO;
+import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.room.persistence.Room;
 import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +28,7 @@ public class RoomTest {
     }
 
     @Test
-    void testGenerateRoom() {
+    void testCreateRoom() {
         // Arrange
         String roomLabel = "ClassroomA";
         int seatRows = 6;
@@ -42,7 +42,7 @@ public class RoomTest {
     }
 
     @Test
-    void testModifyRoom() {
+    void testUpdateRoom() {
         // Arrange
         String roomLabel = "ClassroomA";
         int seatRows = 6;
@@ -52,7 +52,7 @@ public class RoomTest {
         when(roomRepository.findByName(roomLabel)).thenReturn(Optional.of(currentRoom));
 
         // Act
-        Optional<RoomDTO> modifiedRoomDto = roomService.updateRoom(roomLabel, seatRows + 1, seatColumns + 1);
+        Optional<RoomDto> modifiedRoomDto = roomService.updateRoom(roomLabel, seatRows + 1, seatColumns + 1);
 
         // Assert
         assertTrue(modifiedRoomDto.isPresent());
@@ -62,7 +62,7 @@ public class RoomTest {
     }
 
     @Test
-    void testModifyNonexistentRoom() {
+    void testUpdateRoomNonExistent() {
         // Arrange
         String roomLabel = "NonExistentClassroom";
         int seatRows = 6;
@@ -71,7 +71,7 @@ public class RoomTest {
         when(roomRepository.findByName(roomLabel)).thenReturn(Optional.empty());
 
         // Act
-        Optional<RoomDTO> modifiedRoomDto = roomService.updateRoom(roomLabel, seatRows, seatColumns);
+        Optional<RoomDto> modifiedRoomDto = roomService.updateRoom(roomLabel, seatRows, seatColumns);
 
         // Assert
         assertTrue(modifiedRoomDto.isEmpty());
@@ -79,7 +79,7 @@ public class RoomTest {
     }
 
     @Test
-    void testEraseRoom() {
+    void testDeleteRoom() {
         // Arrange
         String roomLabel = "RoomToDelete";
         int seatRows = 6;
@@ -89,7 +89,7 @@ public class RoomTest {
         when(roomRepository.findByName(roomLabel)).thenReturn(Optional.of(existingRoom));
 
         // Act
-        Optional<RoomDTO> erasedRoomDto = roomService.deleteRoom(roomLabel);
+        Optional<RoomDto> erasedRoomDto = roomService.deleteRoom(roomLabel);
 
         // Assert
         assertTrue(erasedRoomDto.isPresent());
@@ -98,14 +98,14 @@ public class RoomTest {
     }
 
     @Test
-    void testEraseNonexistentRoom() {
+    void testDeleteRoomNonExistent() {
         // Arrange
         String roomLabel = "NonExistentRoom";
 
         when(roomRepository.findByName(roomLabel)).thenReturn(Optional.empty());
 
         // Act
-        Optional<RoomDTO> erasedRoomDto = roomService.deleteRoom(roomLabel);
+        Optional<RoomDto> erasedRoomDto = roomService.deleteRoom(roomLabel);
 
         // Assert
         assertTrue(erasedRoomDto.isEmpty());
@@ -113,12 +113,12 @@ public class RoomTest {
     }
 
     @Test
-    void testInspectRooms() {
+    void testListRooms() {
         // Arrange
         when(roomRepository.findAll()).thenReturn(Collections.singletonList(new Room("ClassroomA", 6, 10)));
 
         // Act
-        List<RoomDTO> roomDtoList = roomService.listRooms();
+        List<RoomDto> roomDtoList = roomService.listRooms();
 
         // Assert
         assertNotNull(roomDtoList);

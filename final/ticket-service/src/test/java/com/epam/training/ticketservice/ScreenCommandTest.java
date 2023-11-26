@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
-/*public class ScreenCommandTest {
+public class ScreenCommandTest {
     @Mock
     private ScreeningService screeningService;
 
@@ -43,7 +43,7 @@ import static org.mockito.Mockito.when;
     }
 
     @Test
-    void displayScreenings_ShouldProvideNoScreeningsMessage_WhenNoScreensAreAvailable() {
+    void listScreening_ShouldReturnNoScreeningsMessage_WhenNoScreensExist() {
         // Arrange
         when(screeningService.listScreens()).thenReturn(Collections.emptyList());
 
@@ -51,11 +51,11 @@ import static org.mockito.Mockito.when;
         String result = screenCommand.listScreening();
 
         // Assert
-        assertEquals("There are currently no screenings scheduled", result);
+        assertEquals("There are no screenings", result);
     }
 
     @Test
-    void removeScreening_ShouldConfirmDeletion_WhenScreeningIsSuccessfullyRemoved() {
+    void deleteScreening_ShouldReturnSuccessMessage_WhenScreeningDeletionIsSuccessful() {
         // Arrange
         doNothing().when(screeningService).removeScreen(any(), any(), any());
 
@@ -63,7 +63,7 @@ import static org.mockito.Mockito.when;
         String result = screenCommand.deleteScreening("AnotherMovie", "AnotherRoom", "2023-01-01 14:00");
 
         // Assert
-        assertEquals("Screening successfully removed from schedule", result);
+        assertEquals("Screening deleted successfully", result);
     }
 }
-*/
+

@@ -1,6 +1,6 @@
 package com.epam.training.ticketservice;
 import com.epam.training.ticketservice.core.movie.MovieServiceImpl;
-import com.epam.training.ticketservice.core.movie.model.MovieDTO;
+import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,7 +53,7 @@ public class MovieTest {
         when(movieRepository.findByTitle(title)).thenReturn(Optional.of(existingMovie));
 
         // Act
-        Optional<MovieDTO> updatedMovieDto = movieService.updateMovie(title, "Comedy", 90);
+        Optional<MovieDto> updatedMovieDto = movieService.updateMovie(title, "Comedy", 90);
 
         // Assert
         assertTrue(updatedMovieDto.isPresent());
@@ -72,7 +72,7 @@ public class MovieTest {
         when(movieRepository.findByTitle(title)).thenReturn(Optional.empty());
 
         // Act
-        Optional<MovieDTO> updatedMovieDto = movieService.updateMovie(title, genre, duration);
+        Optional<MovieDto> updatedMovieDto = movieService.updateMovie(title, genre, duration);
 
         // Assert
         assertTrue(updatedMovieDto.isEmpty());
@@ -90,7 +90,7 @@ public class MovieTest {
         when(movieRepository.findByTitle(title)).thenReturn(Optional.of(existingMovie));
 
         // Act
-        Optional<MovieDTO> deletedMovieDto = movieService.deleteMovie(title);
+        Optional<MovieDto> deletedMovieDto = movieService.deleteMovie(title);
 
         // Assert
         assertTrue(deletedMovieDto.isPresent());
@@ -106,7 +106,7 @@ public class MovieTest {
         when(movieRepository.findByTitle(title)).thenReturn(Optional.empty());
 
         // Act
-        Optional<MovieDTO> deletedMovieDto = movieService.deleteMovie(title);
+        Optional<MovieDto> deletedMovieDto = movieService.deleteMovie(title);
 
         // Assert
         assertTrue(deletedMovieDto.isEmpty());
@@ -119,7 +119,7 @@ public class MovieTest {
         when(movieRepository.findAll()).thenReturn(Collections.singletonList(new Movie("Movie1", "Action", 120)));
 
         // Act
-        List<MovieDTO> movieDtoList = movieService.listMovies();
+        List<MovieDto> movieDtoList = movieService.listMovies();
 
         // Assert
         assertNotNull(movieDtoList);

@@ -1,11 +1,10 @@
 package com.epam.training.ticketservice.UI.command;
 
 import com.epam.training.ticketservice.core.room.RoomService;
-import com.epam.training.ticketservice.core.room.model.RoomDTO;
+import com.epam.training.ticketservice.core.room.model.RoomDto;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -24,15 +23,14 @@ public class RoomCommand {
         }
     }
 
-    @ShellMethod(key = "list rooms", value = "List all rooms")
+    @ShellMethod(key = "list rooms", value = "Get rooms")
     public String listRooms() {
-        List<RoomDTO> rooms = roomService.listRooms();
-
+        List<RoomDto> rooms = roomService.listRooms();
         if (rooms.isEmpty()) {
             return "There are no rooms at the moment";
         } else {
             StringBuilder result = new StringBuilder();
-            for (RoomDTO room : rooms) {
+            for (RoomDto room : rooms) {
                 result.append(String.format("Room %s with %d seats, %d rows, and %d columns\n",
                         room.getName(), room.getNumRows() * room.getNumColumns(), room.getNumRows(), room.getNumColumns()));
             }
@@ -42,20 +40,20 @@ public class RoomCommand {
 
     @ShellMethod(key = "update room", value = "Update an existing room")
     public String updateRoom(String name, Integer numRows, Integer numColumns) {
-        Optional<RoomDTO> updatedRoom = roomService.updateRoom(name, numRows, numColumns);
-        return updatedRoom.map(room -> "Room update successful: " + formatRoom(room))
-                .orElse("Failed to update room! Room not found.");
+        Optional<RoomDto> updatedRoom = roomService.updateRoom(name, numRows, numColumns);
+        return updatedRoom.map(room -> "Update room was successful: " + formatRoom(room))
+                .orElse("Update room failed! Room not found.");
     }
 
     @ShellMethod(key = "delete room", value = "Delete an existing room")
     public String deleteRoom(String name) {
-        Optional<RoomDTO> deletedRoom = roomService.deleteRoom(name);
-        return deletedRoom.map(room -> "Room deletion successful: " + formatRoom(room))
-                .orElse("Failed to delete room! Room not found.");
+        Optional<RoomDto> deletedRoom = roomService.deleteRoom(name);
+        return deletedRoom.map(room -> "Delete room was successful: " + formatRoom(room))
+                .orElse("Delete room failed! Room not found.");
     }
 
-    private String formatRoom(RoomDTO room) {
-        return String.format("%s with %d seats, %d rows, and %d columns",
+    private String formatRoom(RoomDto room) {
+        return String.format("%s with %d seats, %d rows and %d columns",
                 room.getName(), room.getNumRows() * room.getNumColumns(), room.getNumRows(), room.getNumColumns());
     }
 
