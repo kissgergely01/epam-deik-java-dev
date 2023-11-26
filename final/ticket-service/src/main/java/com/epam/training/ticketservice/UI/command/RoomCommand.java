@@ -29,7 +29,7 @@ public class RoomCommand {
         List<RoomDTO> rooms = roomService.listRooms();
 
         if (rooms.isEmpty()) {
-            return "No rooms available at the moment";
+            return "There are no rooms at the moment";
         } else {
             StringBuilder result = new StringBuilder();
             for (RoomDTO room : rooms) {
