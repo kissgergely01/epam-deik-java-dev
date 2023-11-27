@@ -17,6 +17,7 @@ public class ScreeningServiceImpl implements ScreeningService {
     private final ScreeningRepository screeningRepository;
     private final MovieRepository movieRepository;
 
+
     @Override
     public String registerScreen(ScreeningDto screeningDTO) {
         if (checkForOverlap(screeningDTO)) {
@@ -42,7 +43,7 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
     private boolean isBreakPeriod(ScreeningDto screeningDTO) {
         return screeningRepository
-                .findByScreeningEndDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
+                .findBy_ScreeningEndDate_GreaterThanEqual_ScreeningEndDate_LessThanEqual_And_Room_Name(
                         screeningDTO.getScreeningDate().minusSeconds(10*60),
                         screeningDTO.getScreeningDate(),
                         screeningDTO.getRoom().getName())
@@ -51,19 +52,19 @@ public class ScreeningServiceImpl implements ScreeningService {
 
     public boolean checkForOverlap(ScreeningDto screeningDTO){
         return screeningRepository
-                .findByScreeningDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
+                .findBy_ScreeningDate_GreaterThan_ScreeningEndDate_LessThanEqual_And_Room_Name(
                         screeningDTO.getScreeningDate(), screeningDTO.getScreeningEndDate(), screeningDTO.getRoom().getName())
                 .isPresent()
                 || screeningRepository
-                .findByScreeningDateGreaterThanEqualAndScreeningDateLessThanEqualAndRoom_Name(
+                .findBy_ScreeningDate_GreaterThanEqual_ScreeningDate_LessThanEqual_And_Room_Name(
                         screeningDTO.getScreeningDate(), screeningDTO.getScreeningEndDate(), screeningDTO.getRoom().getName())
                 .isPresent()
                 || screeningRepository
-                .findByScreeningEndDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
+                .findBy_ScreeningEndDate_GreaterThanEqual_ScreeningEndDate_LessThanEqual_And_Room_Name(
                         screeningDTO.getScreeningDate(), screeningDTO.getScreeningEndDate(), screeningDTO.getRoom().getName())
                 .isPresent()
                 || screeningRepository
-                .findByScreeningDateLessThanEqualAndScreeningEndDateGreaterThanEqualAndRoom_Name(
+                .findBy_ScreeningDate_LessThanEqual_ScreeningEndDate_GreaterThanEqual_And_Room_Name(
                         screeningDTO.getScreeningDate(), screeningDTO.getScreeningEndDate(), screeningDTO.getRoom().getName())
                 .isPresent();
     }

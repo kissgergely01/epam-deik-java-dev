@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.UI.command;
+package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.Users.UserService;
 import com.epam.training.ticketservice.core.Users.model.UserDto;
@@ -28,7 +28,7 @@ public class ScreenCommand {
     private LocalDateTime date;
 
     //@ShellMethodAvailability("isAvailable")
-    @ShellMethod(key = "create screening", value = " creating a screening in a cinema room")
+    @ShellMethod(key = "create screening", value = " creating a screening")
     public String createScreening(String movieName, String roomName, String screeningTime) throws ParseException {
         date = LocalDateTime.parse(screeningTime, format);
         ScreeningDto screeningDto = ScreeningDto.builder()
@@ -40,7 +40,7 @@ public class ScreenCommand {
         return screenService.registerScreen(screeningDto);
     }
 
-    @ShellMethod(key = "list screenings", value = "Shows all the existing screening")
+    @ShellMethod(key = "list screenings", value = "List all screening")
     public String listScreening() {
         if (screenService.listScreens().isEmpty()) {
             return "There are no screenings";
@@ -57,7 +57,7 @@ public class ScreenCommand {
                 .collect(Collectors.joining("\n"));
     }
 
-    @ShellMethod(key = "delete screening", value = "delete specific screening")
+    @ShellMethod(key = "delete screening", value = "delete a screening")
     public String deleteScreening(String movieName, String roomName, String screeningDate) {
         try {
             date = LocalDateTime.parse(screeningDate, format);

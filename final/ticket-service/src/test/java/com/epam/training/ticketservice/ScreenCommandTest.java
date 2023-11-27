@@ -4,7 +4,7 @@ import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
 import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
 import com.epam.training.ticketservice.core.screening.ScreeningService;
 import com.epam.training.ticketservice.core.Users.UserService;
-import com.epam.training.ticketservice.UI.command.ScreenCommand;
+import com.epam.training.ticketservice.ui.command.ScreenCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

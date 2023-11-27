@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService {
     private UserDto loggedInUser = null;
 
     @Override
-    public Optional<UserDto> login(String username, String password) {
-        Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
+    public Optional<UserDto> login(String name, String password) {
+        Optional<User> user = userRepository.findByUsernameAndPassword(name, password);
         if (user.isEmpty()) {
             return Optional.empty();
         }
@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
         return describe();
     }
     @Override
-    public Optional<UserDto> adminLogin(String username, String password) {
-        Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
+    public Optional<UserDto> adminLogin(String name, String password) {
+        Optional<User> user = userRepository.findByUsernameAndPassword(name, password);
 
         if (user.isEmpty() || user.get().getUser_right() != User.User_right.ADMIN) {
             return Optional.empty();
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(String username, String password) {
-        User user = new User(username, password, User.User_right.USER);
-        userRepository.save(user);
+        User newuser = new User(username, password, User.User_right.USER);
+        userRepository.save(newuser);
     }
 }

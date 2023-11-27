@@ -2,6 +2,7 @@ package com.epam.training.ticketservice;
 
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
+import com.epam.training.ticketservice.core.screening.ScreeningService;
 import com.epam.training.ticketservice.core.screening.ScreeningServiceImpl;
 import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import com.epam.training.ticketservice.core.screening.persistence.Screening;
@@ -36,6 +37,7 @@ class ScreeningTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+
 
 
     @Test

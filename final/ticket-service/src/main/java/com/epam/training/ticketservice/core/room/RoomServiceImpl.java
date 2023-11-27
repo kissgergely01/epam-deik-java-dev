@@ -17,8 +17,8 @@ public class RoomServiceImpl implements  RoomService{
 
     @Override
     public void createRoom(String name, Integer numRows, Integer numColumns) {
-        Room room = new Room(name,numRows,numColumns);
-        roomRepository.save(room);
+        Room newroom = new Room(name,numRows,numColumns);
+        roomRepository.save(newroom);
     }
 
     @Override

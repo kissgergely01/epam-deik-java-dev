@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.UI.command;
+package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.room.RoomService;
 import com.epam.training.ticketservice.core.room.model.RoomDto;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class RoomCommand {
     private final RoomService roomService;
 
-    @ShellMethod(key = "create room", value = "Create a new room")
+    @ShellMethod(key = "create room", value = "Create a room")
     public String createRoom(String name, Integer numRows, Integer numColumns) {
         try {
             roomService.createRoom(name, numRows, numColumns);
@@ -23,7 +23,7 @@ public class RoomCommand {
         }
     }
 
-    @ShellMethod(key = "list rooms", value = "Get rooms")
+    @ShellMethod(key = "list rooms", value = "List of rooms")
     public String listRooms() {
         List<RoomDto> rooms = roomService.listRooms();
         if (rooms.isEmpty()) {
@@ -31,21 +31,21 @@ public class RoomCommand {
         } else {
             StringBuilder result = new StringBuilder();
             for (RoomDto room : rooms) {
-                result.append(String.format("Room %s with %d seats, %d rows, and %d columns\n",
+                result.append(String.format("Room %s: %d seats, %d rows, and %d columns\n",
                         room.getName(), room.getNumRows() * room.getNumColumns(), room.getNumRows(), room.getNumColumns()));
             }
             return result.toString();
         }
     }
 
-    @ShellMethod(key = "update room", value = "Update an existing room")
+    @ShellMethod(key = "update room", value = "Update a room")
     public String updateRoom(String name, Integer numRows, Integer numColumns) {
         Optional<RoomDto> updatedRoom = roomService.updateRoom(name, numRows, numColumns);
         return updatedRoom.map(room -> "Update room was successful: " + formatRoom(room))
                 .orElse("Update room failed! Room not found.");
     }
 
-    @ShellMethod(key = "delete room", value = "Delete an existing room")
+    @ShellMethod(key = "delete room", value = "Delete a room")
     public String deleteRoom(String name) {
         Optional<RoomDto> deletedRoom = roomService.deleteRoom(name);
         return deletedRoom.map(room -> "Delete room was successful: " + formatRoom(room))

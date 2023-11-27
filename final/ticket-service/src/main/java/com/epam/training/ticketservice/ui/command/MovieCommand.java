@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.UI.command;
+package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.movie.MovieService;
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
@@ -13,13 +13,13 @@ import java.util.Optional;
 public class MovieCommand {
     private final MovieService movieService;
 
-    @ShellMethod(key = "create movie", value = "Movie Creation")
+    @ShellMethod(key = "create movie", value = "Create a  Movie")
     public String createMovie(String title, String category, Integer duration) {
         try {
             movieService.createMovie(title, category, duration);
-            return "Create movie was successful!";
+            return "Movie creation was successful!";
         } catch (Exception e) {
-            return "Create movie failed!";
+            return "Movie creation failed!";
         }
     }
 
@@ -37,18 +37,18 @@ public class MovieCommand {
             return result.toString();
         }
     }
-    @ShellMethod(key = "update movie", value = "Update an existing movie")
+    @ShellMethod(key = "update movie", value = "Update a movie")
     public String updateMovie(String title, String category, Integer duration) {
         Optional<MovieDto> updatedMovie = movieService.updateMovie(title, category, duration);
-        return updatedMovie.map(movie -> "Update movie was successful: " + formatMovie(movie))
-                .orElse("Update movie failed! Movie not found.");
+        return updatedMovie.map(movie -> "Movie update was successful: " + formatMovie(movie))
+                .orElse("Movie update failed! Movie not found.");
     }
 
-    @ShellMethod(key = "delete movie", value = "Delete an existing movie")
+    @ShellMethod(key = "delete movie", value = "Delete a movie")
     public String deleteMovie(String title) {
         Optional<MovieDto> deletedMovie = movieService.deleteMovie(title);
-        return deletedMovie.map(movie -> "Delete movie was successful: " + formatMovie(movie))
-                .orElse("Delete movie failed! Movie not found.");
+        return deletedMovie.map(movie -> "Movie delete was successful: " + formatMovie(movie))
+                .orElse("Movie delete failed! Movie not found.");
     }
 
     private String formatMovie(MovieDto movie) {

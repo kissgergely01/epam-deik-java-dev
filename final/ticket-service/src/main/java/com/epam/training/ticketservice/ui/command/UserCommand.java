@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.UI.command;
+package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.Users.UserService;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ public class UserCommand {
                 .orElse("You need to login first!");
     }
 
-    @ShellMethod(key = "sign in privileged", value = "Sign in privileged")
+    @ShellMethod(key = "sign in privileged", value = "sign in privileged")
     public String adminLogin(String username, String password){
         return userService.adminLogin(username,password)
                 .map(userDto -> userDto + " is successfully logged in!")

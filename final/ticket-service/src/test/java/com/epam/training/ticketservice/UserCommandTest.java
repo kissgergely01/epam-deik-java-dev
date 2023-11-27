@@ -1,6 +1,6 @@
 package com.epam.training.ticketservice;
 
-import com.epam.training.ticketservice.UI.command.UserCommand;
+import com.epam.training.ticketservice.ui.command.UserCommand;
 import com.epam.training.ticketservice.core.Users.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

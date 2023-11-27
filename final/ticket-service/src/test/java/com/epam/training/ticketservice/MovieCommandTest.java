@@ -2,7 +2,7 @@ package com.epam.training.ticketservice;
 
 import com.epam.training.ticketservice.core.movie.MovieService;
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
-import com.epam.training.ticketservice.UI.command.MovieCommand;
+import com.epam.training.ticketservice.ui.command.MovieCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -33,13 +33,13 @@ class MovieCommandTest {
     @Test
     void updateMovie_ShouldReturnSuccessMessage_WhenMovieUpdateIsSuccessful() {
         // Arrange
-        when(movieService.updateMovie(any(), any(), any())).thenReturn(Optional.of(new MovieDto("Updated Movie", "Drama", 150)));
+        when(movieService.updateMovie(any(), any(), any())).thenReturn(Optional.of(new MovieDto("Updated Movie", "Drama", 120)));
 
         // Act
         String result = movieCommand.updateMovie("Test Movie", "Action", 120);
 
         // Assert
-        assertEquals("Update movie was successful: Updated Movie (Drama, 150 minutes)", result);
+        assertEquals("Movie update was successful: Updated Movie (Drama, 120 minutes)", result);
     }
 
     @Test
@@ -51,19 +51,19 @@ class MovieCommandTest {
         String result = movieCommand.updateMovie("Test Movie", "Action", 120);
 
         // Assert
-        assertEquals("Update movie failed! Movie not found.", result);
+        assertEquals("Movie update failed! Movie not found.", result);
     }
 
     @Test
     void deleteMovie_ShouldReturnSuccessMessage_WhenMovieDeletionIsSuccessful() {
         // Arrange
-        when(movieService.deleteMovie(any())).thenReturn(Optional.of(new MovieDto("Deleted Movie", "Comedy", 90)));
+        when(movieService.deleteMovie(any())).thenReturn(Optional.of(new MovieDto("Deleted Movie", "Comedy", 100)));
 
         // Act
         String result = movieCommand.deleteMovie("Test Movie");
 
         // Assert
-        assertEquals("Delete movie was successful: Deleted Movie (Comedy, 90 minutes)", result);
+        assertEquals("Movie delete was successful: Deleted Movie (Comedy, 100 minutes)", result);
     }
 
     @Test
@@ -75,7 +75,7 @@ class MovieCommandTest {
         String result = movieCommand.deleteMovie("Test Movie");
 
         // Assert
-        assertEquals("Delete movie failed! Movie not found.", result);
+        assertEquals("Movie delete failed! Movie not found.", result);
     }
 }
 

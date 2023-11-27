@@ -136,16 +136,17 @@
                             <excludes>
                                 <exclude>com/epam/training/ticketservice/Application.class</exclude>
                                 <exclude>com/epam/training/ticketservice/core/configuration/**</exclude>
-                                <exclude>com/epam/training/ticketservice/UI/configuration/**</exclude>
+                                <exclude>com/epam/training/ticketservice/ui/configuration/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/movie/model/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/room/model/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/screening/model/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/Users/model/**</exclude>
-                                <exclude>com/epam/training/ticketservice/UI/**</exclude>
+                                <exclude>com/epam/training/ticketservice/ui/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/movie/persistence/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/room/persistence/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/screening/persistence/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/Users/persistence/**</exclude>
+                                <exclude>com/epam/training/ticketservice/ui/command/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>
