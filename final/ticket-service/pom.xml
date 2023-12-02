@@ -140,12 +140,12 @@
                                 <exclude>com/epam/training/ticketservice/core/movie/model/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/room/model/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/screening/model/**</exclude>
-                                <exclude>com/epam/training/ticketservice/core/Users/model/**</exclude>
+                                <exclude>com/epam/training/ticketservice/core/user/model/**</exclude>
                                 <exclude>com/epam/training/ticketservice/ui/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/movie/persistence/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/room/persistence/**</exclude>
                                 <exclude>com/epam/training/ticketservice/core/screening/persistence/**</exclude>
-                                <exclude>com/epam/training/ticketservice/core/Users/persistence/**</exclude>
+                                <exclude>com/epam/training/ticketservice/core/user/persistence/**</exclude>
                                 <exclude>com/epam/training/ticketservice/ui/command/**</exclude>
                             </excludes>
                         </configuration>

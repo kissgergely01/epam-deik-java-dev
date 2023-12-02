@@ -1,23 +1,19 @@
 package com.epam.training.ticketservice;
 
-import com.epam.training.ticketservice.core.Users.model.UserDto;
-import com.epam.training.ticketservice.core.Users.persistence.User;
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
 import com.epam.training.ticketservice.core.room.persistence.Room;
 import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
 import com.epam.training.ticketservice.core.screening.ScreeningService;
-import com.epam.training.ticketservice.core.Users.UserService;
+import com.epam.training.ticketservice.core.user.UserService;
 import com.epam.training.ticketservice.ui.command.ScreenCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.shell.Availability;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

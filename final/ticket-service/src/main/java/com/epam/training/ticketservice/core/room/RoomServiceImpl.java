@@ -16,17 +16,17 @@ public class RoomServiceImpl implements  RoomService{
     private final RoomRepository roomRepository;
 
     @Override
-    public void createRoom(String name, Integer numRows, Integer numColumns) {
-        Room newroom = new Room(name,numRows,numColumns);
+    public void createRoom(String name, Integer RowsNumber, Integer ColumnsNumber) {
+        Room newroom = new Room(name,RowsNumber,ColumnsNumber);
         roomRepository.save(newroom);
     }
 
     @Override
-    public Optional<RoomDto> updateRoom(String name, Integer numRows, Integer numColumns) {
+    public Optional<RoomDto> updateRoom(String name, Integer RowsNumber, Integer ColumnsNumber) {
         return roomRepository.findByName(name)
                 .map(room -> {
-                    room.setColumnsNumber(numColumns);
-                    room.setRowsNumber(numRows);
+                    room.setColumnsNumber(ColumnsNumber);
+                    room.setRowsNumber(RowsNumber);
                     roomRepository.save(room);
                     return new RoomDto(room.getName(), room.getRowsNumber(), room.getColumnsNumber());
                 });

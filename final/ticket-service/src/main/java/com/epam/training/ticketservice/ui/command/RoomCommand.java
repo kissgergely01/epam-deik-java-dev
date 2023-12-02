@@ -31,8 +31,8 @@ public class RoomCommand {
         } else {
             StringBuilder result = new StringBuilder();
             for (RoomDto room : rooms) {
-                result.append(String.format("Room %s: %d seats, %d rows, and %d columns\n",
-                        room.getName(), room.getNumRows() * room.getNumColumns(), room.getNumRows(), room.getNumColumns()));
+                result.append(String.format("Room %s with %d seats, %d rows and %d columns\n",
+                        room.getName(), room.getRowsNumber() * room.getColumnsNumber(), room.getRowsNumber(), room.getColumnsNumber()));
             }
             return result.toString();
         }
@@ -54,7 +54,7 @@ public class RoomCommand {
 
     private String formatRoom(RoomDto room) {
         return String.format("%s with %d seats, %d rows and %d columns",
-                room.getName(), room.getNumRows() * room.getNumColumns(), room.getNumRows(), room.getNumColumns());
+                room.getName(), room.getRowsNumber() * room.getColumnsNumber(), room.getRowsNumber(), room.getColumnsNumber());
     }
 
 }

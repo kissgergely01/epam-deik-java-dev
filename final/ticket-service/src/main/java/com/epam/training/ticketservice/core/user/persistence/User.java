@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.core.Users.persistence;
+package com.epam.training.ticketservice.core.user.persistence;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,18 +20,18 @@ public class User {
     @GeneratedValue
     private Integer id;
     @Column(unique = true)
-    private String name;
+    private String username;
     private String password;
     @Enumerated(EnumType.STRING)
-    private User_right user_right;
+    private Role role;
 
-    public User(String username, String password, User_right user_right) {
-        this.name = username;
+    public User(String username, String password, Role role) {
+        this.username = username;
         this.password = password;
-        this.user_right = user_right;
+        this.role = role;
     }
 
-    public enum User_right {
+    public enum Role {
         ADMIN,
         USER
     }

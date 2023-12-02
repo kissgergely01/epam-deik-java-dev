@@ -1,9 +1,9 @@
 package com.epam.training.ticketservice;
 
-import com.epam.training.ticketservice.core.Users.UserServiceImpl;
-import com.epam.training.ticketservice.core.Users.model.UserDto;
-import com.epam.training.ticketservice.core.Users.persistence.User;
-import com.epam.training.ticketservice.core.Users.persistence.UserRepository;
+import com.epam.training.ticketservice.core.user.UserServiceImpl;
+import com.epam.training.ticketservice.core.user.model.UserDto;
+import com.epam.training.ticketservice.core.user.persistence.User;
+import com.epam.training.ticketservice.core.user.persistence.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -33,7 +33,7 @@ class UsersTest {
         // Arrange
         String username = "john_doe";
         String password = "secure123";
-        User user = new User(username, password, User.User_right.USER);
+        User user = new User(username, password, User.Role.USER);
 
         when(userRepository.findByUsernameAndPassword(username, password)).thenReturn(Optional.of(user));
 
@@ -42,9 +42,9 @@ class UsersTest {
 
         // Assert
         assertTrue(loggedInUser.isPresent());
-        assertEquals(username, loggedInUser.get().getName());
+        assertEquals(username, loggedInUser.get().getUsername());
         assertEquals(password, loggedInUser.get().getPassword());
-        assertEquals(User.User_right.USER, loggedInUser.get().getUser_right());
+        assertEquals(User.Role.USER, loggedInUser.get().getRole());
     }
 
     @Test
@@ -67,7 +67,7 @@ class UsersTest {
         // Arrange
         String username = "admin_user";
         String password = "admin123";
-        User adminUser = new User(username, password, User.User_right.ADMIN);
+        User adminUser = new User(username, password, User.Role.ADMIN);
 
         when(userRepository.findByUsernameAndPassword(username, password)).thenReturn(Optional.of(adminUser));
 
@@ -76,9 +76,9 @@ class UsersTest {
 
         // Assert
         assertTrue(loggedInAdmin.isPresent());
-        assertEquals(username, loggedInAdmin.get().getName());
+        assertEquals(username, loggedInAdmin.get().getUsername());
         assertEquals(password, loggedInAdmin.get().getPassword());
-        assertEquals(User.User_right.ADMIN, loggedInAdmin.get().getUser_right());
+        assertEquals(User.Role.ADMIN, loggedInAdmin.get().getRole());
     }
 
     @Test
@@ -101,7 +101,7 @@ class UsersTest {
         // Arrange
         String username = "logged_in_user";
         String password = "active_user";
-        User user = new User(username, password, User.User_right.USER);
+        User user = new User(username, password, User.Role.USER);
 
         when(userRepository.findByUsernameAndPassword(username, password)).thenReturn(Optional.of(user));
 
@@ -113,9 +113,9 @@ class UsersTest {
 
         // Assert
         assertTrue(loggedOutUser.isPresent());
-        assertEquals(username, loggedOutUser.get().getName());
+        assertEquals(username, loggedOutUser.get().getUsername());
         assertEquals(password, loggedOutUser.get().getPassword());
-        assertEquals(User.User_right.USER, loggedOutUser.get().getUser_right());
+        assertEquals(User.Role.USER, loggedOutUser.get().getRole());
 
         // Check that the user is actually logged out
         Optional<UserDto> loggedInUser = userService.describe();
@@ -127,7 +127,7 @@ class UsersTest {
         // Arrange
         String username = "admin_user";
         String password = "admin123";
-        User adminUser = new User(username, password, User.User_right.ADMIN);
+        User adminUser = new User(username, password, User.Role.ADMIN);
 
         when(userRepository.findByUsernameAndPassword(username, password)).thenReturn(Optional.of(adminUser));
 
@@ -139,9 +139,9 @@ class UsersTest {
 
         // Assert
         assertTrue(loggedInAdmin.isPresent());
-        assertEquals(username, loggedInAdmin.get().getName());
+        assertEquals(username, loggedInAdmin.get().getUsername());
         assertEquals(password, loggedInAdmin.get().getPassword());
-        assertEquals(User.User_right.ADMIN, loggedInAdmin.get().getUser_right());
+        assertEquals(User.Role.ADMIN, loggedInAdmin.get().getRole());
     }
 
     @Test

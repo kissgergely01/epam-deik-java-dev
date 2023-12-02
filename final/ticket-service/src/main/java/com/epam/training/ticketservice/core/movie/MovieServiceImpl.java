@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
     @Override
-    public void createMovie(String title, String genre, Integer duration) {
-        Movie newmovie = new Movie(title, genre, duration);
+    public void createMovie(String title, String category, Integer length) {
+        Movie newmovie = new Movie(title, category, length);
         movieRepository.save(newmovie);
     }
 

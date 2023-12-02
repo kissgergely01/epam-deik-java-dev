@@ -56,8 +56,8 @@ public class RoomTest {
 
         // Assert
         assertTrue(modifiedRoomDto.isPresent());
-        assertEquals(seatRows + 1, modifiedRoomDto.get().getNumRows());
-        assertEquals(seatColumns + 1, modifiedRoomDto.get().getNumColumns());
+        assertEquals(seatRows + 1, modifiedRoomDto.get().getRowsNumber());
+        assertEquals(seatColumns + 1, modifiedRoomDto.get().getColumnsNumber());
         verify(roomRepository, times(1)).save(any(Room.class));
     }
 

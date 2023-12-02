@@ -1,8 +1,8 @@
 package com.epam.training.ticketservice.ui.command;
 
-import com.epam.training.ticketservice.core.Users.UserService;
-import com.epam.training.ticketservice.core.Users.model.UserDto;
-import com.epam.training.ticketservice.core.Users.persistence.User;
+import com.epam.training.ticketservice.core.user.UserService;
+import com.epam.training.ticketservice.core.user.model.UserDto;
+import com.epam.training.ticketservice.core.user.persistence.User;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
 import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
 import com.epam.training.ticketservice.core.screening.ScreeningService;
@@ -70,7 +70,7 @@ public class ScreenCommand {
 
     private Availability isAvailable(){
         Optional<UserDto> user = userService.describe();
-        return user.isPresent() &&  user.get().getUser_right() != User.User_right.ADMIN
+        return user.isPresent() &&  user.get().getRole() != User.Role.ADMIN
                 ? Availability.available()
                 : Availability.unavailable("You are not an admin!");
     }

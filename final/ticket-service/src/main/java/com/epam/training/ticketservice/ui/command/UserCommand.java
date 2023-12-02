@@ -1,6 +1,6 @@
 package com.epam.training.ticketservice.ui.command;
 
-import com.epam.training.ticketservice.core.Users.UserService;
+import com.epam.training.ticketservice.core.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -34,7 +34,7 @@ public class UserCommand {
     @ShellMethod(key = "describe account", value = "Get user information")
     public String description(){
         return userService.describe()
-                .map(userDto -> "Signed in with privileged account '"+ userDto.getName()+"'")
+                .map(userDto -> "Signed in with privileged account '"+ userDto.getUsername()+"'")
                 .orElse("You are not signed in");
     }
 

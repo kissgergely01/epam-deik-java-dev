@@ -5,6 +5,6 @@ import lombok.Value;
 @Value
 public class RoomDto {
     private final String name;
-    private final int numRows;
-    private final int numColumns;
+    private final int RowsNumber;
+    private final int ColumnsNumber;
 }

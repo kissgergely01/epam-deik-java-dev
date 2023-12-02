@@ -11,21 +11,21 @@ import java.util.Optional;
 @Repository
 public interface ScreeningRepository extends JpaRepository<Screening, Long> {
     Optional<Screening> findByScreeningDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
-            LocalDateTime startDate, LocalDateTime endDate, String roomName);
+            LocalDateTime screeningDate, LocalDateTime screeningEndDate, String name);
 
     Optional<Screening> findByScreeningDateGreaterThanEqualAndScreeningDateLessThanEqualAndRoom_Name(
-            LocalDateTime startDate, LocalDateTime endDate, String roomName);
+            LocalDateTime screeningDate, LocalDateTime screeningEndDate, String name);
 
     Optional<Screening> findByScreeningEndDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
-            LocalDateTime startDate, LocalDateTime endDate, String roomName);
+            LocalDateTime screeningDate, LocalDateTime screeningEndDate, String name);
 
     Optional<Screening> findByScreeningDateLessThanEqualAndScreeningEndDateGreaterThanEqualAndRoom_Name(
-            LocalDateTime startDate, LocalDateTime endDate, String roomName);
+            LocalDateTime screeningDate, LocalDateTime screeningEndDate, String name);
 
     Optional<Screening> findByScreeningEndDateGreaterThanEqual(LocalDateTime screeningEndDate);
 
 
     @Transactional
-    void deleteByTitleAndRoom_NameAndScreeningDate(Movie movie, String roomName, LocalDateTime screeningDate);
+    void deleteByTitleAndRoom_NameAndScreeningDate(Movie title, String name1, LocalDateTime screeningDate);
 
 }
