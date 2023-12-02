@@ -43,7 +43,7 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
     private boolean isBreakPeriod(ScreeningDto screeningDTO) {
         return screeningRepository
-                .findBy_ScreeningEndDate_GreaterThanEqual_ScreeningEndDate_LessThanEqual_And_Room_Name(
+                .findByScreeningEndDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
                         screeningDTO.getScreeningDate().minusSeconds(10*60),
                         screeningDTO.getScreeningDate(),
                         screeningDTO.getRoom().getName())
@@ -52,19 +52,19 @@ public class ScreeningServiceImpl implements ScreeningService {
 
     public boolean checkForOverlap(ScreeningDto screeningDTO){
         return screeningRepository
-                .findBy_ScreeningDate_GreaterThan_ScreeningEndDate_LessThanEqual_And_Room_Name(
+                .findByScreeningDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
                         screeningDTO.getScreeningDate(), screeningDTO.getScreeningEndDate(), screeningDTO.getRoom().getName())
                 .isPresent()
                 || screeningRepository
-                .findBy_ScreeningDate_GreaterThanEqual_ScreeningDate_LessThanEqual_And_Room_Name(
+                .findByScreeningDateGreaterThanEqualAndScreeningDateLessThanEqualAndRoom_Name(
                         screeningDTO.getScreeningDate(), screeningDTO.getScreeningEndDate(), screeningDTO.getRoom().getName())
                 .isPresent()
                 || screeningRepository
-                .findBy_ScreeningEndDate_GreaterThanEqual_ScreeningEndDate_LessThanEqual_And_Room_Name(
+                .findByScreeningEndDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
                         screeningDTO.getScreeningDate(), screeningDTO.getScreeningEndDate(), screeningDTO.getRoom().getName())
                 .isPresent()
                 || screeningRepository
-                .findBy_ScreeningDate_LessThanEqual_ScreeningEndDate_GreaterThanEqual_And_Room_Name(
+                .findByScreeningDateLessThanEqualAndScreeningEndDateGreaterThanEqualAndRoom_Name(
                         screeningDTO.getScreeningDate(), screeningDTO.getScreeningEndDate(), screeningDTO.getRoom().getName())
                 .isPresent();
     }
@@ -83,7 +83,7 @@ public class ScreeningServiceImpl implements ScreeningService {
         Movie movie = movieRepository.findByTitle(movieName)
                 .orElseThrow(() -> new RuntimeException("Movie not found")); // Handle this exception appropriately
 
-        screeningRepository.deleteByMovieAndRoom_NameAndDate(movie, roomName, screenDate);
+        screeningRepository.deleteByTitleAndRoom_NameAndScreeningDate(movie, roomName, screenDate);
     }
 
     public ScreeningDto convertToDto(Screening screen){

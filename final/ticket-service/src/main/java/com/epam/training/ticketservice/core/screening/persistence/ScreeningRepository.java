@@ -10,21 +10,22 @@ import java.util.Optional;
 
 @Repository
 public interface ScreeningRepository extends JpaRepository<Screening, Long> {
-    Optional<Screening> findBy_ScreeningDate_GreaterThan_ScreeningEndDate_LessThanEqual_And_Room_Name(
+    Optional<Screening> findByScreeningDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
             LocalDateTime startDate, LocalDateTime endDate, String roomName);
 
-    Optional<Screening> findBy_ScreeningDate_GreaterThanEqual_ScreeningDate_LessThanEqual_And_Room_Name(
+    Optional<Screening> findByScreeningDateGreaterThanEqualAndScreeningDateLessThanEqualAndRoom_Name(
             LocalDateTime startDate, LocalDateTime endDate, String roomName);
 
-    Optional<Screening> findBy_ScreeningEndDate_GreaterThanEqual_ScreeningEndDate_LessThanEqual_And_Room_Name(
+    Optional<Screening> findByScreeningEndDateGreaterThanEqualAndScreeningEndDateLessThanEqualAndRoom_Name(
             LocalDateTime startDate, LocalDateTime endDate, String roomName);
 
-    Optional<Screening> findBy_ScreeningDate_LessThanEqual_ScreeningEndDate_GreaterThanEqual_And_Room_Name(
+    Optional<Screening> findByScreeningDateLessThanEqualAndScreeningEndDateGreaterThanEqualAndRoom_Name(
             LocalDateTime startDate, LocalDateTime endDate, String roomName);
 
+    Optional<Screening> findByScreeningEndDateGreaterThanEqual(LocalDateTime screeningEndDate);
 
 
     @Transactional
-    void deleteByMovieAndRoom_NameAndDate(Movie movie, String roomName, LocalDateTime screeningDate);
+    void deleteByTitleAndRoom_NameAndScreeningDate(Movie movie, String roomName, LocalDateTime screeningDate);
 
 }

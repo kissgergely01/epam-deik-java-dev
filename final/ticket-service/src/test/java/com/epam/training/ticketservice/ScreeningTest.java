@@ -2,7 +2,6 @@ package com.epam.training.ticketservice;
 
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
-import com.epam.training.ticketservice.core.screening.ScreeningService;
 import com.epam.training.ticketservice.core.screening.ScreeningServiceImpl;
 import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import com.epam.training.ticketservice.core.screening.persistence.Screening;
@@ -59,7 +58,7 @@ class ScreeningTest {
         // Arrange
         Movie movie = new Movie();
         when(movieRepository.findByTitle(anyString())).thenReturn(Optional.of(movie));
-        doNothing().when(screenRepository).deleteByMovieAndRoom_NameAndDate(
+        doNothing().when(screenRepository).deleteByTitleAndRoom_NameAndScreeningDate(
                 any(Movie.class), anyString(), any(LocalDateTime.class));
 
         // Act
@@ -67,7 +66,7 @@ class ScreeningTest {
 
         // Assert
         verify(movieRepository, times(1)).findByTitle(anyString());
-        verify(screenRepository, times(1)).deleteByMovieAndRoom_NameAndDate(
+        verify(screenRepository, times(1)).deleteByTitleAndRoom_NameAndScreeningDate(
                 any(Movie.class), anyString(), any(LocalDateTime.class));
     }
 }
