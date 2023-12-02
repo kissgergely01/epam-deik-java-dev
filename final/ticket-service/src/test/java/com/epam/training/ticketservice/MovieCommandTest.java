@@ -9,11 +9,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class MovieCommandTest {
 
@@ -26,6 +29,18 @@ class MovieCommandTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void createMovie_ShouldReturnSuccessMessage_WhenMovieCreationIsSuccessful() {
+        // Arrange
+        doNothing().when(movieService).createMovie(any(), any(), any());
+
+        // Act
+        String result = movieCommand.createMovie("Test Movie", "Action", 120);
+
+        // Assert
+        assertEquals("Movie creation was successful!", result);
     }
 
 
@@ -77,6 +92,42 @@ class MovieCommandTest {
         // Assert
         assertEquals("Movie delete failed! Movie not found.", result);
     }
+    @Test
+    void listMovies_ShouldReturnFormattedMovieList_WhenMoviesExist() {
+        // Arrange
+        List<MovieDto> movieList = Arrays.asList(
+                new MovieDto("Movie1", "Action", 120),
+                new MovieDto("Movie2", "Comedy", 90)
+                // Add more movies as needed
+        );
+
+        when(movieService.listMovies()).thenReturn(movieList);
+
+        // Act
+        String result = movieCommand.listMovies();
+
+        // Assert
+        StringBuilder expected = new StringBuilder("");
+        for (MovieDto movie : movieList) {
+            expected.append(String.format("%s (%s, %d minutes)\n",
+                    movie.getTitle(), movie.getCategory(), movie.getLength()));
+        }
+
+        assertEquals(expected.toString().trim(), result.trim());
+    }
+
+    @Test
+    void listMovies_ShouldReturnNoMoviesMessage_WhenNoMoviesExist() {
+        // Arrange
+        when(movieService.listMovies()).thenReturn(Collections.emptyList());
+
+        // Act
+        String result = movieCommand.listMovies();
+
+        // Assert
+        assertEquals("There are no movies at the moment", result.trim());
+    }
 }
+
 
 

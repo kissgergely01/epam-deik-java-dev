@@ -8,6 +8,7 @@ import org.springframework.shell.standard.ShellMethod;
 import java.util.List;
 import java.util.Optional;
 
+
 @ShellComponent
 @AllArgsConstructor
 public class MovieCommand {
